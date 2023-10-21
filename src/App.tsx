@@ -14,10 +14,10 @@ function App() {
               <SideBarNav/>
             </div>
             <div className="2xl:col-span-9 xl:col-span-8 lg:col-span-7 max-sm:col-span-1 max-sm:col-end-2 sm:col-span-12 bg-slate-800">
-                2
+                
             </div>
             <div className="2xl:col-span-1 xl:col-span-2 lg:col-span-3 sm:col-span-0 max-lg:hidden lg:block bg-slate-800">
-                3
+                
             </div>
         </div>
       </div>
