@@ -32,7 +32,7 @@ function SideBarNav() {
                                     <span className="flex ml-3 whitespace-nowrap">Inbox</span>
                                     <span className="whitespace-nowrap inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                                 </a>
-                            </li>
+                            </li> 
                             <li>
                                 <a href="#" className="flex items-center p-2 text-slate-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group">
                                     <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-slate-200 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
