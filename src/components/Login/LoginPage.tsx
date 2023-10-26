@@ -23,43 +23,17 @@ export default function LoginPage() {
     logi.password = password;
     loginUser(logi)
   }
-  const testClick =() => {
-    fetchUsers();
-  }
+
   const fetchToken = () => {
     axios
-    .post<JWT>('https://localhost:7168/api/Test/Authenticate?minutes=1000&role=Admin')
+    .post<string>('https://localhost:7168/api/User/Login',logi)
     .then((resp) => {
       const jwt_resp = resp.data;
-      setJwt(jwt_resp.jwt);
-    });
-  };
-
-  const fetchUsers = () => {
-
-    const config = {
-      headers: { Authorization: `Bearer ${jwt}` }
-    }
-
-    axios
-    .get('https://localhost:7168/api/Test/getuser',config)
-    .then((resp) => {
-      const jwt_resp = resp.data;
-      console.log(resp.data);
+      setJwt(jwt_resp);
     });
   };
 
 async function loginUser(iuser:ILogin) {
-  try {
-    fetchToken();
-    console.log(jwt);
-    cookies.set("jwt",jwt)
-  }
-  catch (e) {
-    alert(e)
-  }
-}
-async function testUser(iuser:ILogin) {
   try {
     fetchToken();
     console.log(jwt);
@@ -111,12 +85,12 @@ async function testUser(iuser:ILogin) {
           Remember me
         </Label>
       </div>
-      <Button type="submit" onClick={onButtonClick}>
+      <Button type="button" onClick={onButtonClick}>
         Submit
       </Button>
-      <Button onClick={testClick}>
+      {/* <Button onClick={testClick}>
       Test
-      </Button>
+      </Button> */}
     </form>
   )
 }

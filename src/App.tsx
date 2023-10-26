@@ -6,6 +6,7 @@ import SideBarNav from './components/Navbars/SideBarNav';
 import LoginPage from './components/Login/LoginPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './components/Home/HomePage';
+import RegisterPage from './components/Register/RegisterPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
              <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <Footer />
              </div>
