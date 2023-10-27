@@ -2,12 +2,12 @@ import { UserActionTypes } from "../../types/Interfaces/Actions/Users/IFetchUser
 import { IUserAction } from "../../types/Interfaces/Actions/Users/IUserAction";
 import { IUserState } from "../../types/Interfaces/Reducers/User/IUserState";
 
-const initialState = {
+const initialState: IUserState = {
     users: [],
     loading: false,
     error: null
 }
-
+//22:09
 export const userReducer = (state = initialState,action: IUserAction): IUserState => {
     switch(action.type) {
         case UserActionTypes.FETCH_USERS:
