@@ -1,6 +1,7 @@
 {
   "name": "rubi.dev",
   "version": "0.1.0",
+  "homepage": "https://myhold.net/",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.17",
