@@ -6,12 +6,15 @@ import { ILogin } from '../../types/Interfaces/Login/ILogin';
 import { Login } from '../../types/Classes/Login/Login';
 import axios, { AxiosRequestConfig } from 'axios';
 import { JWT } from '../../types/Interfaces/Login/JWT';
+import { IJWT } from '../../types/Interfaces/Login/IJWT';
 
+interface UserProps {
+  jwts: IJWT;
+}
 
-
-export default function LoginPage() {
+export default function LoginPage(props: UserProps) {
   const cookies = new Cookies();
-  
+
   const logi = new Login();
 
   const [email,setEmail] = useState("")
