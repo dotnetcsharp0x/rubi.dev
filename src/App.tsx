@@ -9,6 +9,7 @@ import HomePage from './components/Home/HomePage';
 import RegisterPage from './components/Register/RegisterPage';
 import { JWT } from './types/Classes/JWT/JWT';
 import Cookies from 'universal-cookie';
+import UserList from './components/UserList/UserList';
 
 function App() {
   const jwt = new JWT();
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage jwts={jwt}/>} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/userlist" element={<UserList />} />
         </Routes>
         <Footer />
              </div>
