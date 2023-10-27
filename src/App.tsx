@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage jwts={jwt}/>} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/userlist" element={<UserList />} />
+          <Route path="/userlist" element={<UserList jwts={jwt}/>} />
         </Routes>
         <Footer />
              </div>

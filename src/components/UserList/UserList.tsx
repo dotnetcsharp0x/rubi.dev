@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUsers } from "../../store/action-creator/user";
 import { IUserAction } from "../../types/Interfaces/Actions/Users/IUserAction";
+import { UserProps } from "../../types/Interfaces/Users/IUserProps";
 
-const UserList: React.FC = () => {
+export default function UserList(props: UserProps) {
     const {users,error,loading} = useTypedSelector(state => state.user);
     const dispatch: any = useDispatch() 
     useEffect(() => {
@@ -21,5 +22,3 @@ const UserList: React.FC = () => {
         </div>
     )
 }
-
-export default UserList;
