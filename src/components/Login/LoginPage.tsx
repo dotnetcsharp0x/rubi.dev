@@ -5,8 +5,7 @@ import Cookies from 'universal-cookie';
 import { ILogin } from '../../types/Interfaces/Login/ILogin';
 import { Login } from '../../types/Classes/Login/Login';
 import axios, { AxiosRequestConfig } from 'axios';
-import { JWT } from '../../types/Interfaces/Login/JWT';
-import { IJWT } from '../../types/Interfaces/Login/IJWT';
+import { IJWT } from '../../types/Interfaces/JWT/IJWT';
 
 interface UserProps {
   jwts: IJWT;

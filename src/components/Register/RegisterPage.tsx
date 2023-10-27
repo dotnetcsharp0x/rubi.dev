@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 import { IRegister } from '../../types/Interfaces/Register/IRegister';
 import { RegisterU } from '../../types/Classes/Register/Register';
 import axios, { AxiosRequestConfig } from 'axios';
-import { JWT } from '../../types/Interfaces/Login/JWT';
+import { IJWT } from '../../types/Interfaces/JWT/IJWT';
 
 
 
