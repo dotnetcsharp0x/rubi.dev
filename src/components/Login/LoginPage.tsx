@@ -6,10 +6,7 @@ import { ILogin } from '../../types/Interfaces/Login/ILogin';
 import { Login } from '../../types/Classes/Login/Login';
 import axios, { AxiosRequestConfig } from 'axios';
 import { IJWT } from '../../types/Interfaces/JWT/IJWT';
-
-interface UserProps {
-  jwts: IJWT;
-}
+import { UserProps } from '../../types/Interfaces/Users/IUserProps';
 
 export default function LoginPage(props: UserProps) {
   const cookies = new Cookies();
