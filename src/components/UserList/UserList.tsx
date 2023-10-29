@@ -15,7 +15,9 @@ export default function UserList(props: UserProps) {
     console.log(users);
     return (
         <div>
-            <h2>Users</h2>
+            {error &&
+                <h2>{error}</h2>
+            }
             {users.map(user =>
                 <div key={user.id}>{user.firstName} - {user.email}</div>    
             )}
