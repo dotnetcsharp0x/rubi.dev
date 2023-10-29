@@ -16,9 +16,8 @@ export default function Header() {
   return (
     <>
     <Navbar fluid rounded className='bg-slate-800'>
-    <Navbar.Brand href="/">
-      <img src="/logo192.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-      <span className="self-center whitespace-nowrap text-xl font-semibold text-slate-200">#MyHold</span>
+    <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
+      <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
     <div className="flex md:order-2">
       <Dropdown
