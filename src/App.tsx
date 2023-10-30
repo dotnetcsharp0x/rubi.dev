@@ -20,10 +20,10 @@ function App() {
       <BrowserRouter>
       <Header/>
       <div className="container-fluid grid grid-flow-col ">
-             <div className="2xl:col-auto xl:col-span-1 max-sm:col-start-1 max-sm:col-end-7 sm:col-span-2">
+             <div className="2xl:col-auto xl:col-span-1 sm:col-span-2 max-sm:col-start-1 max-sm:col-end-11">
                <SideBarNav/>
              </div>
-             <div className="2xl:col-span-9 xl:col-span-8 lg:col-span-7 max-sm:col-span-1 max-sm:col-end-2 sm:col-span-12 bg-slate-800">
+             <div className="2xl:col-span-9 xl:col-span-8 lg:col-span-7 sm:col-span-12 max-sm:col-start-1 max-sm:col-end-11 bg-slate-800">
              <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage jwts={jwt}/>} />
