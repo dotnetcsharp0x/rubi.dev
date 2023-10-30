@@ -38,7 +38,7 @@ async function loginUser(iuser:ILogin) {
   try {
     fetchToken();
     console.log(jwt);
-    cookies.set("jwt",jwt)
+    cookies.set("jwt",jwt,{maxAge:2678400})
   }
   catch (e) {
     alert(e)
@@ -97,9 +97,9 @@ async function loginUser(iuser:ILogin) {
       </div>
       <div className='bg-slate-700 h-1 mt-2 border-separate rounded-md opacity-50'></div>
       </div>
-      <Button type="button" onClick={onButtonClick} className=''>
+      <button type="button" onClick={onButtonClick} className='bg-blue-800 hover:bg-blue-700 rounded-md py-3 px-5 text-slate-300'>
         Login
-      </Button>
+      </button>
     </form>
     </div>
   )
