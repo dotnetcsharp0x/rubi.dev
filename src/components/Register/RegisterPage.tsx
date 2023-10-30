@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const reg = new RegisterU();
 
   const [name,setName] = useState("")
+  const [remember,setRemember] = useState(false)
   const [name2,setName2] = useState("")
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -27,29 +28,40 @@ export default function RegisterPage() {
     reg.Password = password;
     Register();
   }
-  const Register = () => {
-    axios
-    .post<IRegister>('https://localhost:7168/api/User/Register',reg)
-    .then((resp)=> {
-      const reps_data = resp.data;
-      console.log(reps_data);
-    })
+  const Register = async () => {
+    try {
+      const resp = await fetchToken();
+      window.location.href = '/';
+    }
+    catch (e) {
+      alert(e)
+    }
   }
 
-async function RegisterUser() {
+async function fetchToken() {
   try {
-    Register();
+    const resp = await axios.post<IRegister>('https://localhost:7168/api/User/Register',reg);
+    if(remember) {
+      cookies.set("jwt",resp.data,{maxAge:2678400});
+    }
+    else {
+      cookies.set("jwt",resp.data);
+    }
+    setJwt(String(resp));
   }
   catch (e) {
     alert(e)
   }
 }
+const toggleRemember = () => {
+  setRemember((prevState) => !prevState);
+};
 
   return (
     <div className='grid place-items-center mt-10'>
     <form className="flex max-w-md flex-col gap-4 grid place-items-center" 
     >
-      <img src="/logo512.png" className="h-20 w-20 mb-4 max-auto content-center" alt="Skyme logo" />
+      <img src="/logo512.png" className="h-28 w-28 mb-4 max-auto content-center" alt="Skyme logo" />
       <div>
         <div className="relative mb-1">
           <div className="absolute inset-y-0 left-0 z-10 flex items-center pl-3.5 pointer-events-none">
@@ -125,14 +137,17 @@ async function RegisterUser() {
       </div>
       <div className='place-items-left w-full p-0 m-0'>
       <div className="flex items-center gap-2">
-        <Checkbox id="remember"/>
+        <Checkbox id="remember" onClick={toggleRemember}/>
         <Label htmlFor="remember" className='text-slate-300'>
           Remember me
         </Label>
       </div>
       <div className='bg-slate-700 h-1 mt-2 border-separate rounded-md opacity-50'></div>
       </div>
-      <button type="button" onClick={onButtonClick} className='bg-blue-800 hover:bg-blue-700 rounded-md py-3 px-5 text-slate-300'>
+      <button type="button" onClick={onButtonClick} className='
+      bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-600 
+      hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-500 hover:to-pink-600 
+      rounded-md py-3 px-5 text-slate-200'>
         Register
       </button>
     </form>
