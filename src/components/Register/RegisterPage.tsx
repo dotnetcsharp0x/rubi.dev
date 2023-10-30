@@ -61,7 +61,8 @@ const toggleRemember = () => {
     <div className='grid place-items-center mt-10'>
     <form className="flex max-w-md flex-col gap-4 grid place-items-center" 
     >
-      <img src="/logo512.png" className="h-28 w-28 mb-4 max-auto content-center" alt="Skyme logo" />
+      <img src="/logo512.png" className="h-28 w-28 max-auto content-center m-0 p-0" alt="Skyme logo" />
+      <h1 className='m-0 p-0 text-slate-200 text-2xl'>Register in Skymey</h1>
       <div>
         <div className="relative mb-1">
           <div className="absolute inset-y-0 left-0 z-10 flex items-center pl-3.5 pointer-events-none">
@@ -145,11 +146,13 @@ const toggleRemember = () => {
       <div className='bg-slate-700 h-1 mt-2 border-separate rounded-md opacity-50'></div>
       </div>
       <button type="button" onClick={onButtonClick} className='
-      bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-600 
-      hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-500 hover:to-pink-600 
-      rounded-md py-3 px-5 text-slate-200'>
+      bg-rose-600 hover:bg-rose-700
+      rounded-md py-2 px-4 text-slate-200 text-lg'>
         Register
       </button>
+      <div className='flex dont-have'>
+        <span className='text-slate-200 inline-block mx-2'>Already have an account?</span> <a href="/login" className='text-rose-500 bold inline-blocks hover:underline'>Login here</a>
+      </div>
     </form>
     </div>
   )

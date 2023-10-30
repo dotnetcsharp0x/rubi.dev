@@ -13,6 +13,7 @@ function logOut() {
   cookies.remove('jwt');
   window.location.href = '/';
 }
+const separator = ' / ';
 const cookies = new Cookies();
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -22,7 +23,7 @@ export default function Header() {
   jwtc.jwt = cookies.get('jwt');
   return (
     <>
-    <Navbar fluid rounded className='bg-slate-800'>
+    <Navbar fluid rounded className='bg-slate-800 mx-6 text-lg'>
     <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
       <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
@@ -47,7 +48,13 @@ export default function Header() {
       </Dropdown>
       <Navbar.Toggle />
     </div>    
-}
+    }
+    {!jwtc.jwt &&
+    <div>
+      <a href='/login' className='bg-rose-600 hover:bg-rose-700
+      rounded-md py-2 px-4 text-slate-200'>Login</a>
+      </div>
+    }
   </Navbar>
     <hr className="w-full my-2 border-slate-900/40 sm:mx-auto"></hr>
   </>
