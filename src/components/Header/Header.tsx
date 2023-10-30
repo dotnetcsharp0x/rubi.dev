@@ -3,6 +3,7 @@ import { FooterDivider } from 'flowbite-react/lib/esm/components/Footer/FooterDi
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
 import { JWT } from '../../types/Classes/JWT/JWT';
+import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
 
 function getCookie(key: string) {
   var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
@@ -29,7 +30,7 @@ export default function Header() {
     </Navbar.Brand>
     {jwtc.jwt &&
     <div className="flex md:order-2">
-      <Dropdown
+     <Dropdown
         arrowIcon={false}
         inline
         label={
@@ -41,12 +42,11 @@ export default function Header() {
           <span className="block truncate text-sm font-medium">name@flowbite.com</span>
         </Dropdown.Header>
         <Dropdown.Item>Dashboard</Dropdown.Item>
-        <Dropdown.Item>Settings</Dropdown.Item>
+        <Dropdown.Item icon={HiLogout}>Settings</Dropdown.Item>
         <Dropdown.Item>Earnings</Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={logOut}>Sign out</Dropdown.Item>
+        <Dropdown.Item icon={HiLogout} onClick={logOut}>Sign out</Dropdown.Item>
       </Dropdown>
-      <Navbar.Toggle />
     </div>    
     }
     {!jwtc.jwt &&
