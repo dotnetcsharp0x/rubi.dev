@@ -14,7 +14,7 @@ import UserList from './components/UserList/UserList';
 function App() {
   const jwt = new JWT();
   const cookies = new Cookies();
-  jwt.jwt = cookies.get("jwt");
+  jwt.token = cookies.get("jwt");
   return (
     <div className="App pt-2 bg-slate-800">
       <BrowserRouter>
