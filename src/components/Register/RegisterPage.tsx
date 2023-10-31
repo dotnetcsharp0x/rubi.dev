@@ -126,12 +126,14 @@ export default function RegisterPage() {
 
 async function fetchToken() {
   try {
-    const resp = await axios.post<IRegister>('https://localhost:7168/api/User/Register',reg);
+    const resp = await axios.post<IJWT>('https://localhost:7168/api/User/Register',reg);
+    console.log(resp.data);
+    console.log(resp.data.token);
     if(remember) {
-      cookies.set("jwt",resp.data,{maxAge:2678400});
+      cookies.set("jwt",resp.data.token,{maxAge:3600});
     }
     else {
-      cookies.set("jwt",resp.data);
+      cookies.set("jwt",resp.data.token);
     }
     setJwt(String(resp));
   }

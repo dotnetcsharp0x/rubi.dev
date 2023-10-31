@@ -21,14 +21,14 @@ export default function Header() {
   const [cookiesdata, setCookiesdata] = useState("")
   //cookies.set('s','seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiRG1pdHJpeSIsImxldmVsIjoiMTIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJuYmYiOjE2OTgxMzY5MTQsImV4cCI6MTY5ODE5NjkxNCwiaXNzIjoibXlob2xkIiwiYXVkIjoibXlob2xkIn0.iNEnaCke4Vd8BD3zbXzsdhQJwk8xhkscoOCR7uChrnk')
   const jwtc = new JWT();
-  jwtc.jwt = cookies.get('jwt');
+  jwtc.token = cookies.get('jwt');
   return (
     <>
     <Navbar fluid rounded className='bg-slate-800 mx-6 text-lg'>
     <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
       <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
-    {jwtc.jwt &&
+    {jwtc.token &&
     <div className="flex md:order-2">
      <Dropdown
         arrowIcon={false}
@@ -49,7 +49,7 @@ export default function Header() {
       </Dropdown>
     </div>    
     }
-    {!jwtc.jwt &&
+    {!jwtc.token &&
     <div>
       <a href='/login' className='bg-rose-600 hover:bg-rose-700
       rounded-md py-2 px-4 text-slate-200'>Login</a>
