@@ -4,31 +4,51 @@ import { useState } from 'react';
 import Cookies from 'universal-cookie';
 import { JWT } from '../../types/Classes/JWT/JWT';
 import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
+import axios from 'axios';
+import { IJWT } from '../../types/Interfaces/JWT/IJWT';
 
-function getCookie(key: string) {
-  var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
-  return b ? b.pop() : "";
-}
 function logOut() {
   const cookies = new Cookies();
-  cookies.remove('jwt');
+  cookies.remove('token');
+  cookies.remove('refreshToken');
   window.location.href = '/';
 }
 const separator = ' / ';
 const cookies = new Cookies();
+const jwtc = new JWT();
+jwtc.accessToken = cookies.get('token');
+jwtc.refreshToken = cookies.get('refreshToken');
+const fetchToken  = async () => {
+try {
+  const config = {
+    headers: { Authorization: `Bearer ${jwtc.accessToken}` }
+};
+  const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/refresh',jwtc,config);
+  cookies.set("token",resp.data.accessToken);
+  cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
+  jwtc.accessToken = String(resp.data.accessToken);
+  jwtc.refreshToken = String(resp.data.refreshToken);
+  return await resp.data.refreshToken;
+}
+catch(e) {
+  console.log("ERROR: ");
+  console.log(e);
+}
+};
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [cookiesdata, setCookiesdata] = useState("")
-  //cookies.set('s','seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiRG1pdHJpeSIsImxldmVsIjoiMTIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJuYmYiOjE2OTgxMzY5MTQsImV4cCI6MTY5ODE5NjkxNCwiaXNzIjoibXlob2xkIiwiYXVkIjoibXlob2xkIn0.iNEnaCke4Vd8BD3zbXzsdhQJwk8xhkscoOCR7uChrnk')
-  const jwtc = new JWT();
-  jwtc.token = cookies.get('jwt');
+  const resp = async () => {
+    await fetchToken();
+  }
+  resp();
   return (
     <>
     <Navbar fluid rounded className='bg-slate-800 mx-6 text-lg'>
     <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
       <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
-    {jwtc.token &&
+    {jwtc.accessToken &&
     <div className="flex md:order-2">
      <Dropdown
         arrowIcon={false}
@@ -49,7 +69,7 @@ export default function Header() {
       </Dropdown>
     </div>    
     }
-    {!jwtc.token &&
+    {!jwtc.accessToken &&
     <div>
       <a href='/login' className='bg-rose-600 hover:bg-rose-700
       rounded-md py-2 px-4 text-slate-200'>Login</a>

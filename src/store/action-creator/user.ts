@@ -12,7 +12,7 @@ export const fetchUsers = () => {
             });
             const cookies = new Cookies();
             const config = {
-                headers: { Authorization: `Bearer ${cookies.get('jwt')}` }
+                headers: { Authorization: `Bearer ${cookies.get('token')}` }
             };
             const response = await axios.get('https://46.22.247.253:5001/api/User/GetUsers',config)
             dispatch({type:UserActionTypes.FETCH_USERS_SUCCESS, payload: response.data})
