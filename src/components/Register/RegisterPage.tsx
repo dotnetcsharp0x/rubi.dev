@@ -128,7 +128,7 @@ async function fetchToken() {
   try {
     const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Register',reg);
     if(remember) {
-      cookies.set("token",resp.data.accessToken);
+      cookies.set("token",resp.data.accessToken,{maxAge:2592000});
       cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
     }
     else {
