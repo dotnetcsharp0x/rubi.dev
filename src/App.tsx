@@ -10,15 +10,19 @@ import RegisterPage from './components/Register/RegisterPage';
 import { JWT } from './types/Classes/JWT/JWT';
 import Cookies from 'universal-cookie';
 import UserList from './components/UserList/UserList';
+import axios from 'axios';
+import { IJWT } from './types/Interfaces/JWT/IJWT';
+import { JwtPayload, jwtDecode } from "jwt-decode";
+import { JwtPayload2 } from './types/Interfaces/JWT/JwtPayload2';
+import { UserProps } from './types/Interfaces/Users/IUserProps';
 
-function App() {
-  const jwt = new JWT();
-  const cookies = new Cookies();
-  jwt.accessToken = cookies.get("token");
+export default function App(props: UserProps) {
+  console.log("app");
+  console.log(props.jwts.accessToken);
   return (
     <div className="App pt-2 bg-slate-800">
       <BrowserRouter>
-      <Header/>
+      <Header jwts={props.jwts}/>
       <div className="container-fluid grid grid-flow-col ">
              <div className="2xl:col-auto xl:col-span-1 sm:col-span-2 max-sm:col-start-1 max-sm:col-end-11">
                <SideBarNav/>
@@ -26,9 +30,9 @@ function App() {
              <div className="2xl:col-span-9 xl:col-span-8 lg:col-span-7 sm:col-span-12 max-sm:col-start-1 max-sm:col-end-11 bg-slate-800">
              <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage jwts={jwt}/>} />
+          <Route path="/login" element={<LoginPage jwts={props.jwts}/>} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/userlist" element={<UserList jwts={jwt}/>} />
+          <Route path="/userlist" element={<UserList jwts={props.jwts}/>} />
         </Routes>
         <Footer />
              </div>
@@ -55,5 +59,3 @@ function App() {
       // </div>
   );
 }
-
-export default App;

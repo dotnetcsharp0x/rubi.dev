@@ -10,9 +10,8 @@ export default function UserList(props: UserProps) {
     const {users,error,loading} = useTypedSelector(state => state.user);
     const dispatch: any = useDispatch() 
     useEffect(() => {
-        dispatch(fetchUsers());
+        dispatch(fetchUsers(props.jwts.accessToken));
     },[]);
-    console.log(users);
     return (
         <div>
             {error &&

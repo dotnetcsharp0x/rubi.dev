@@ -9,8 +9,14 @@ import { IJWT } from '../../types/Interfaces/JWT/IJWT';
 import { UserProps } from '../../types/Interfaces/Users/IUserProps';
 import { HiMail,HiKey } from 'react-icons/hi';
 import { success } from 'io-ts';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { LoginUser, fetchUsers } from '../../store/action-creator/user';
+
 
 export default function LoginPage(props: UserProps) {
+  const {jwtd,error,loading} = useTypedSelector(state => state.user_login);
+const dispatch: any  = useDispatch();
   const cookies = new Cookies();
 
   const logi = new Login();
@@ -79,25 +85,29 @@ export default function LoginPage(props: UserProps) {
     logi.password = password;
     loginUser(logi)
   }
-
-  const fetchToken  = async () => {
-    const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Login',logi);
+  useEffect(() => {
+    if(jwtd.accessToken.length > 0) {
+    console.log("to_login");
+    console.log(jwtd);
     if(remember) {
-      cookies.set("token",resp.data.accessToken,{maxAge:2592000});
-      cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
+      cookies.set("token",jwtd.accessToken,{maxAge:2592000});
+      cookies.set("refreshToken",jwtd.refreshToken,{maxAge:2592000});
     }
     else {
-      cookies.set("token",resp.data.accessToken);
-      cookies.set("refreshToken",resp.data.refreshToken);
+      cookies.set("token",jwtd.accessToken);
+      cookies.set("refreshToken",jwtd.refreshToken);
     }
-    setJwt(String(resp.data.accessToken));
-    return await resp.data.refreshToken;
+    setJwt(String(jwtd.accessToken));
+    window.location.href = '/';
+  }
+},[onButtonClick]);
+  const fetchToken  = async () => {
+    dispatch(LoginUser(logi));
   };
 
 async function loginUser(iuser:ILogin) {
   try {
-    const resp = await fetchToken();
-    window.location.href = '/';
+    await fetchToken();
   }
   catch (e) {
     alert(e)
