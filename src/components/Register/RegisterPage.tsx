@@ -127,15 +127,15 @@ export default function RegisterPage() {
 async function fetchToken() {
   try {
     const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Register',reg);
-    console.log(resp.data);
-    console.log(resp.data.token);
     if(remember) {
-      cookies.set("jwt",resp.data.token,{maxAge:3600});
+      cookies.set("token",resp.data.accessToken);
+      cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
     }
     else {
-      cookies.set("jwt",resp.data.token);
+      cookies.set("token",resp.data.accessToken);
+      cookies.set("refreshToken",resp.data.refreshToken);
     }
-    setJwt(String(resp));
+    setJwt(String(resp.data.accessToken));
   }
   catch (e) {
     alert(e)
