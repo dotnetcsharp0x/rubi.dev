@@ -24,7 +24,7 @@ try {
     headers: { Authorization: `Bearer ${jwtc.accessToken}` }
 };
   const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/refresh',jwtc,config);
-  cookies.set("token",resp.data.accessToken);
+  cookies.set("token",resp.data.accessToken,{maxAge:2592000});
   cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
   jwtc.accessToken = String(resp.data.accessToken);
   jwtc.refreshToken = String(resp.data.refreshToken);

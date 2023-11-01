@@ -83,7 +83,7 @@ export default function LoginPage(props: UserProps) {
   const fetchToken  = async () => {
     const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Login',logi);
     if(remember) {
-      cookies.set("token",resp.data.accessToken);
+      cookies.set("token",resp.data.accessToken,{maxAge:2592000});
       cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
     }
     else {
