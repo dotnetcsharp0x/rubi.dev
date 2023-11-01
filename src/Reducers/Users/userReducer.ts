@@ -1,9 +1,15 @@
 import { UserActionTypes } from "../../types/Interfaces/Actions/Users/IFetchUsersAction";
-import { IUserAction } from "../../types/Interfaces/Actions/Users/IUserAction";
-import { IUserState } from "../../types/Interfaces/Reducers/User/IUserState";
+import { IUserAction, IUserActionLogin } from "../../types/Interfaces/Actions/Users/IUserAction";
+import { IUserState, IUserStateLogin } from "../../types/Interfaces/Reducers/User/IUserState";
 
 const initialState: IUserState = {
     users: [],
+    loading: false,
+    error: null
+}
+
+const initialStateLogin: IUserStateLogin = {
+    jwtd: {accessToken:"",refreshToken:""},
     loading: false,
     error: null
 }
@@ -16,6 +22,18 @@ export const userReducer = (state = initialState,action: IUserAction): IUserStat
             return {loading: false, error: null, users: action.payload}
         case UserActionTypes.FETCH_USERS_ERROR:
             return {loading: false, error: action.payload, users: []}    
+        default:
+            return state
+    }
+}
+export const userReducerLogin = (state = initialStateLogin,action: IUserActionLogin): IUserStateLogin => {
+    switch(action.type) {
+        case UserActionTypes.LOGIN_USER:
+            return {loading: true, error: null, jwtd: {accessToken: "",refreshToken:""}}
+        case UserActionTypes.LOGIN_USER_SUCCESS:
+            return {loading: false, error: null, jwtd: action.payload}
+        case UserActionTypes.LOGIN_USER_ERROR:
+            return {loading: false, error: action.payload, jwtd: {accessToken: "",refreshToken:""}}    
         default:
             return state
     }
