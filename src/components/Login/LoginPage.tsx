@@ -81,15 +81,15 @@ export default function LoginPage(props: UserProps) {
   }
 
   const fetchToken  = async () => {
-    const resp = await axios.post<string>('https://localhost:7168/api/User/Login',logi);
+    const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Login',logi);
     if(remember) {
-      cookies.set("jwt",resp.data,{maxAge:3600});
+      cookies.set("jwt",resp.data.token,{maxAge:3600});
     }
     else {
-      cookies.set("jwt",resp.data);
+      cookies.set("jwt",resp.data.token);
     }
-    setJwt(String(resp));
-    return await resp.data;
+    setJwt(String(resp.data.token));
+    return await resp.data.token;
   };
 
 async function loginUser(iuser:ILogin) {

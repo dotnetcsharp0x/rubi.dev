@@ -126,7 +126,7 @@ export default function RegisterPage() {
 
 async function fetchToken() {
   try {
-    const resp = await axios.post<IJWT>('https://localhost:7168/api/User/Register',reg);
+    const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Register',reg);
     console.log(resp.data);
     console.log(resp.data.token);
     if(remember) {

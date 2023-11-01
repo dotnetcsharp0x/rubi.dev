@@ -14,7 +14,7 @@ export const fetchUsers = () => {
             const config = {
                 headers: { Authorization: `Bearer ${cookies.get('jwt')}` }
             };
-            const response = await axios.get('https://localhost:7168/api/User/GetUsers',config)
+            const response = await axios.get('https://46.22.247.253:5001/api/User/GetUsers',config)
             dispatch({type:UserActionTypes.FETCH_USERS_SUCCESS, payload: response.data})
         }
         catch (e) {
