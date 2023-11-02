@@ -12,7 +12,7 @@ export default function UserList() {
     const dispatch: any = useDispatch() 
     useEffect(() => {
         dispatch(fetchUsers(state.accessToken));
-    },[]);
+    },[dispatch]);
     return (
         <div>
             {error &&
