@@ -14,7 +14,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { LoginUser, fetchUsers } from '../../store/action-creator/user';
 
 
-export default function LoginPage(props: UserProps) {
+export default function LoginPage() {
   const {jwtd,error,loading} = useTypedSelector(state => state.user_login);
 const dispatch: any  = useDispatch();
   const cookies = new Cookies();
