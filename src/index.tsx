@@ -18,35 +18,49 @@ const root = ReactDOM.createRoot(
 const cookies = new Cookies();
   const jwtc = new JWT();
   jwtc.accessToken = cookies.get("token");
-  if(jwtc.accessToken != undefined) {
-    const jwt_token :JwtPayload2  = JSON.parse(JSON.stringify(jwtDecode<JwtPayload2>(jwtc.accessToken)));
-  }
 jwtc.accessToken = cookies.get('token');
 jwtc.refreshToken = cookies.get('refreshToken');
-const fetchToken  = async () => {
+export const fetchToken  = async (jwtr : IJWT) => {
 try {
   const config = {
     headers: { Authorization: `Bearer ${jwtc.accessToken}` }
 };
-  const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/refresh',jwtc,config);
+  const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/refresh',jwtr,config);
   cookies.set("token",resp.data.accessToken,{maxAge:2592000});
   cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
   jwtc.accessToken = String(resp.data.accessToken);
   jwtc.refreshToken = String(resp.data.refreshToken);
   state.accessToken = jwtc.accessToken;
   state.refreshToken = jwtc.refreshToken;
-  return await resp.data.refreshToken;
+  
 }
 catch(e) {
   console.log("ERROR: ");
   console.log(e);
 }
+return await state.accessToken;
 };
 if(jwtc.accessToken != undefined) {
-const resp = async () => {
-  await fetchToken();
-}
-resp();
+  const jwt_token :JwtPayload2  = JSON.parse(JSON.stringify(jwtDecode<JwtPayload2>(jwtc.accessToken)));
+    let seconds = 0;
+    seconds = Number(jwt_token.exp);
+    seconds=seconds*1000;
+    const date = new Date(seconds)
+    //console.log(date.toString());
+    const currentDate=new Date();
+    console.log(date);
+    console.log(currentDate);
+    console.log(currentDate.getTime());
+    console.log(date.getTime());
+    const diff = date.getTime()-currentDate.getTime();
+    const diff_seconds = diff/1000/60;
+    console.log(diff_seconds);
+    if(diff_seconds < 30) {
+    const resp = async () => {
+      await fetchToken(jwtc);
+    }
+    resp();
+  }
 }
 root.render(
     <Provider store={store}>
