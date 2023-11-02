@@ -5,12 +5,13 @@ import { useEffect } from "react";
 import { fetchUsers } from "../../store/action-creator/user";
 import { IUserAction } from "../../types/Interfaces/Actions/Users/IUserAction";
 import { UserProps } from "../../types/Interfaces/Users/IUserProps";
+import { state } from "../../state";
 
-export default function UserList(props: UserProps) {
+export default function UserList() {
     const {users,error,loading} = useTypedSelector(state => state.user);
     const dispatch: any = useDispatch() 
     useEffect(() => {
-        dispatch(fetchUsers(props.jwts.accessToken));
+        dispatch(fetchUsers(state.accessToken));
     },[]);
     return (
         <div>

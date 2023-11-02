@@ -7,6 +7,7 @@ import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
 import axios from 'axios';
 import { IJWT } from '../../types/Interfaces/JWT/IJWT';
 import { UserProps } from '../../types/Interfaces/Users/IUserProps';
+import { state } from '../../state';
 
 function logOut() {
   const cookies = new Cookies();
@@ -15,7 +16,7 @@ function logOut() {
   window.location.href = '/';
 }
 
-export default function Header(props: UserProps) {
+export default function Header() {
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function Header(props: UserProps) {
     <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
       <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
-    {props.jwts.accessToken &&
+    {state.accessToken &&
     <div className="flex md:order-2">
      <Dropdown
         arrowIcon={false}
@@ -44,7 +45,7 @@ export default function Header(props: UserProps) {
       </Dropdown>
     </div>    
     }
-    {!props.jwts.accessToken &&
+    {!state.accessToken &&
     <div>
       <a href='/login' className='bg-rose-600 hover:bg-rose-700
       rounded-md py-2 px-4 text-slate-200'>Login</a>

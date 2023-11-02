@@ -7,6 +7,7 @@ import { UserProps } from "../../types/Interfaces/Users/IUserProps"
 import { IJWT } from "../../types/Interfaces/JWT/IJWT"
 import { config } from "process"
 import { Login } from "../../types/Classes/Login/Login"
+import { state } from "../../state"
 //export default function Header(props: UserProps) {
 export const fetchUsers = (props: string) => {
     return async (dispatch: Dispatch<IUserAction>) => {
@@ -15,7 +16,7 @@ export const fetchUsers = (props: string) => {
                 type:UserActionTypes.FETCH_USERS
             });
             const config = {
-                headers: { Authorization: `Bearer ${props}` }
+                headers: { Authorization: `Bearer ${state.accessToken}` }
             };
             const resp = await axios.get('https://46.22.247.253:5001/api/User/GetUsers',config)
             dispatch({type:UserActionTypes.FETCH_USERS_SUCCESS, payload: resp.data})

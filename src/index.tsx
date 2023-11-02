@@ -10,6 +10,7 @@ import Cookies from 'universal-cookie';
 import { JWT } from './types/Classes/JWT/JWT';
 import { IJWT } from './types/Interfaces/JWT/IJWT';
 import { JwtPayload2 } from './types/Interfaces/JWT/JwtPayload2';
+import { state } from './state';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -32,6 +33,8 @@ try {
   cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
   jwtc.accessToken = String(resp.data.accessToken);
   jwtc.refreshToken = String(resp.data.refreshToken);
+  state.accessToken = jwtc.accessToken;
+  state.refreshToken = jwtc.refreshToken;
   return await resp.data.refreshToken;
 }
 catch(e) {
@@ -48,7 +51,7 @@ resp();
 root.render(
     <Provider store={store}>
       <div className='bg-slate-800 h-screen'>
-      <App jwts={jwtc}/>
+      <App/>
       </div>
     </Provider>
 );
