@@ -13,6 +13,7 @@ export default function UserList() {
     useEffect(() => {
         dispatch(fetchUsers(state.accessToken));
     },[dispatch]);
+    console.log(users);
     return (
         <div>
             {error &&

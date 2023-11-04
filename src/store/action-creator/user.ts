@@ -14,13 +14,17 @@ export const fetchUsers = (props: string) => {
     return async (dispatch: Dispatch<IUserAction>) => {
         try {
             const config = {
-                headers: { Authorization: `Bearer ${state.accessToken}` }
+                headers: { Authorization: `Bearer ${state.accessToken}` },
+                params: {
+                    "token":state.accessToken
+                }
             };
 
             dispatch({
                 type:UserActionTypes.FETCH_USERS
             });
-            const resp = await axios.get('https://46.22.247.253:5001/api/User/GetUsers',config)
+            console.log(state.accessToken);
+            const resp = await axios.get('https://46.22.247.253:5007/api/User/GetUsers',config)
             dispatch({type:UserActionTypes.FETCH_USERS_SUCCESS, payload: resp.data})
         }
         catch (e) {
@@ -35,7 +39,8 @@ export const fetchUsers = (props: string) => {
 export const  LoginUser = (props: Login) => {
     return async (dispatch: Dispatch<IUserActionLogin>) => {
         try {
-            const resp = await axios.post<IJWT>('https://46.22.247.253:5001/api/User/Login',props);
+            console.log(props);
+            const resp = await axios.post<IJWT>('https://46.22.247.253:5007/api/User/Login',props);
             console.log("dispatch");
             console.log(resp.data);
             dispatch({type: UserActionTypes.LOGIN_USER_SUCCESS,payload: resp.data})
