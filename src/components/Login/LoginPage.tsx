@@ -81,8 +81,8 @@ const dispatch: any  = useDispatch();
   const [jwt,setJwt] = useState<string>("")
 
   const onButtonClick =() => {
-    logi.email = email;
-    logi.password = password;
+    logi.Email = email;
+    logi.Password = password;
     loginUser(logi)
   }
   useEffect(() => {

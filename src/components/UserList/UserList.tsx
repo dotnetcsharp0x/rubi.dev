@@ -20,7 +20,7 @@ export default function UserList() {
                 <h2>{error}</h2>
             }
             {users.map(user =>
-                <div key={user.id}>{user.firstName} - {user.email}</div>    
+                <div key={user.Id}>{user.FirstName} - {user.Email}</div>    
             )}
         </div>
     )
