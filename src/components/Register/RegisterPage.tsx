@@ -117,7 +117,12 @@ export default function RegisterPage() {
   const Register = async () => {
     try {
       const resp = await fetchToken();
-      window.location.href = '/';
+      if(resp == 200) {
+        window.location.href = '/';
+      }
+      else {
+        console.log(resp);
+      }
     }
     catch (e) {
       alert(e)
@@ -127,15 +132,21 @@ export default function RegisterPage() {
 async function fetchToken() {
   try {
     const resp = await axios.post<IJWT>('https://46.22.247.253:5007/api/User/Register',reg);
-    if(remember) {
-      cookies.set("token",resp.data.AccessToken,{maxAge:2592000});
-      cookies.set("refreshToken",resp.data.RefreshToken,{maxAge:2592000});
+      if(resp.status == 200) {
+      if(remember) {
+        cookies.set("token",resp.data.AccessToken,{maxAge:2592000});
+        cookies.set("refreshToken",resp.data.RefreshToken,{maxAge:2592000});
+      }
+      else {
+        cookies.set("token",resp.data.AccessToken);
+        cookies.set("refreshToken",resp.data.RefreshToken);
+      }
+      setJwt(String(resp.data.AccessToken));
     }
     else {
-      cookies.set("token",resp.data.AccessToken);
-      cookies.set("refreshToken",resp.data.RefreshToken);
+      console.log("208");
     }
-    setJwt(String(resp.data.AccessToken));
+    return resp.status;
   }
   catch (e) {
     alert(e)
