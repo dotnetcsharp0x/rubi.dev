@@ -86,18 +86,18 @@ const dispatch: any  = useDispatch();
     loginUser(logi)
   }
   useEffect(() => {
-    if(jwtd.accessToken.length > 0) {
+    if(jwtd.AccessToken.length > 0) {
     console.log("to_login");
     console.log(jwtd);
     if(remember) {
-      cookies.set("token",jwtd.accessToken,{maxAge:2592000});
-      cookies.set("refreshToken",jwtd.refreshToken,{maxAge:2592000});
+      cookies.set("token",jwtd.AccessToken,{maxAge:2592000});
+      cookies.set("refreshToken",jwtd.RefreshToken,{maxAge:2592000});
     }
     else {
-      cookies.set("token",jwtd.accessToken);
-      cookies.set("refreshToken",jwtd.refreshToken);
+      cookies.set("token",jwtd.AccessToken);
+      cookies.set("refreshToken",jwtd.RefreshToken);
     }
-    setJwt(String(jwtd.accessToken));
+    setJwt(String(jwtd.AccessToken));
     window.location.href = '/';
   }
 },[onButtonClick]);

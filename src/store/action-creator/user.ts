@@ -14,16 +14,16 @@ export const fetchUsers = (props: string) => {
     return async (dispatch: Dispatch<IUserAction>) => {
         try {
             const config = {
-                headers: { Authorization: `Bearer ${state.accessToken}` },
+                headers: { Authorization: `Bearer ${state.AccessToken}` },
                 params: {
-                    "token":state.accessToken
+                    "token":state.AccessToken
                 }
             };
 
             dispatch({
                 type:UserActionTypes.FETCH_USERS
             });
-            console.log(state.accessToken);
+            console.log(state.AccessToken);
             const resp = await axios.get('https://46.22.247.253:5007/api/User/GetUsers',config)
             dispatch({type:UserActionTypes.FETCH_USERS_SUCCESS, payload: resp.data})
         }

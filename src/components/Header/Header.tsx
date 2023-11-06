@@ -24,7 +24,7 @@ export default function Header() {
     <Navbar.Brand href="/" className='max-auto w-20 flex justify-center items-center'>
       <img src="/logo512.png" className="h-11 max-auto content-center" alt="Skyme logo" />
     </Navbar.Brand>
-    {state.accessToken &&
+    {state.AccessToken &&
     <div className="flex md:order-2">
      <Dropdown
         arrowIcon={false}
@@ -45,7 +45,7 @@ export default function Header() {
       </Dropdown>
     </div>    
     }
-    {!state.accessToken &&
+    {!state.AccessToken &&
     <div>
       <a href='/login' className='bg-rose-600 hover:bg-rose-700
       rounded-md py-2 px-4 text-slate-200'>Login</a>

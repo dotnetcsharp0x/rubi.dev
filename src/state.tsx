@@ -5,8 +5,8 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const state = proxy<IJWT>({ 
-    accessToken: cookies.get('token')
-    ,refreshToken:cookies.get('refreshToken')
+    AccessToken: cookies.get('token')
+    ,RefreshToken:cookies.get('refreshToken')
 });
 
 export {state};

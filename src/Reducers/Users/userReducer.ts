@@ -9,7 +9,7 @@ const initialState: IUserState = {
 }
 
 const initialStateLogin: IUserStateLogin = {
-    jwtd: {accessToken:"",refreshToken:""},
+    jwtd: {AccessToken:"",RefreshToken:""},
     loading: false,
     error: null
 }
@@ -29,11 +29,11 @@ export const userReducer = (state = initialState,action: IUserAction): IUserStat
 export const userReducerLogin = (state = initialStateLogin,action: IUserActionLogin): IUserStateLogin => {
     switch(action.type) {
         case UserActionTypes.LOGIN_USER:
-            return {loading: true, error: null, jwtd: {accessToken: "",refreshToken:""}}
+            return {loading: true, error: null, jwtd: {AccessToken: "",RefreshToken:""}}
         case UserActionTypes.LOGIN_USER_SUCCESS:
             return {loading: false, error: null, jwtd: action.payload}
         case UserActionTypes.LOGIN_USER_ERROR:
-            return {loading: false, error: action.payload, jwtd: {accessToken: "",refreshToken:""}}    
+            return {loading: false, error: action.payload, jwtd: {AccessToken: "",RefreshToken:""}}    
         default:
             return state
     }

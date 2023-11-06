@@ -128,14 +128,14 @@ async function fetchToken() {
   try {
     const resp = await axios.post<IJWT>('https://46.22.247.253:5007/api/User/Register',reg);
     if(remember) {
-      cookies.set("token",resp.data.accessToken,{maxAge:2592000});
-      cookies.set("refreshToken",resp.data.refreshToken,{maxAge:2592000});
+      cookies.set("token",resp.data.AccessToken,{maxAge:2592000});
+      cookies.set("refreshToken",resp.data.RefreshToken,{maxAge:2592000});
     }
     else {
-      cookies.set("token",resp.data.accessToken);
-      cookies.set("refreshToken",resp.data.refreshToken);
+      cookies.set("token",resp.data.AccessToken);
+      cookies.set("refreshToken",resp.data.RefreshToken);
     }
-    setJwt(String(resp.data.accessToken));
+    setJwt(String(resp.data.AccessToken));
   }
   catch (e) {
     alert(e)
