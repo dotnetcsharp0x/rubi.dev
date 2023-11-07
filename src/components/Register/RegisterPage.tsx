@@ -38,13 +38,13 @@ export default function RegisterPage() {
         setEmailDirty(true);
         break;
         case 'password':
-          setPasswordDirty(true);
-          break;
-          case 'name':
-            setNameDirty(true);
-          break;
-          case 'name2':
-            setName2Dirty(true);
+        setPasswordDirty(true);
+        break;
+        case 'name':
+          setNameDirty(true);
+        break;
+        case 'name2':
+          setName2Dirty(true);
         break;
     }
     const email_ref = document.getElementById('email') as HTMLInputElement;

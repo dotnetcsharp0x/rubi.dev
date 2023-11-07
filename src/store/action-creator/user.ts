@@ -58,6 +58,9 @@ export const  LoginUser = (props: Login) => {
             if(error.response.status == 404) {
                 message = "User not found";
             }
+            if(error.response.status == 403) {
+                message = "Incorrect password";
+            }
             dispatch({
                 type: UserActionTypes.LOGIN_USER_ERROR,
                 payload: String(error.message),
