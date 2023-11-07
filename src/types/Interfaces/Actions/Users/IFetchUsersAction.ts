@@ -17,6 +17,7 @@ export interface IFetchUserSuccessAction {
 export interface IFetchUserErrorAction {
     type: UserActionTypes.FETCH_USERS_ERROR;
     payload: string;
+    status: number;
 }
 export interface ILoginUserAction {
     type: UserActionTypes.FETCH_USERS;
@@ -24,8 +25,10 @@ export interface ILoginUserAction {
 export interface ILoginUserErrorAction {
     type: UserActionTypes.LOGIN_USER_ERROR;
     payload: string;
+    status: number;
 }
 export interface ILoginUserSuccessAction {
     type: UserActionTypes.LOGIN_USER_SUCCESS;
     payload: string;
+    status:number;
 }

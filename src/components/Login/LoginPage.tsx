@@ -15,13 +15,14 @@ import { LoginUser, fetchUsers } from '../../store/action-creator/user';
 
 
 export default function LoginPage() {
-  const {jwtd,error,loading} = useTypedSelector(state => state.user_login);
+  const {jwtd,error,loading, status,message} = useTypedSelector(state => state.user_login);
 const dispatch: any  = useDispatch();
   const cookies = new Cookies();
 
   const logi = new Login();
 
   const [email,setEmail] = useState("")
+  const [mainerror, setMainError] = useState("")
   const [remember,setRemember] = useState(false)
   const [password,setPassword] = useState("")
   const [emailDirty, setEmailDirty] = useState(false)
@@ -39,8 +40,6 @@ const dispatch: any  = useDispatch();
           passwordHandler(e);
         break;
     }
-
-    console.log('blur' + e.target.name)
   };
   const emailHandler = (e: FocusEvent<HTMLInputElement, Element>) => {
     setEmail(e.target.value);
@@ -87,8 +86,6 @@ const dispatch: any  = useDispatch();
   }
   useEffect(() => {
     if(jwtd.AccessToken.length > 0) {
-    console.log("to_login");
-    console.log(jwtd);
     if(remember) {
       cookies.set("token",jwtd.AccessToken,{maxAge:2592000});
       cookies.set("refreshToken",jwtd.RefreshToken,{maxAge:2592000});
@@ -101,13 +98,13 @@ const dispatch: any  = useDispatch();
     window.location.href = '/';
   }
 },[onButtonClick]);
-  const fetchToken  = async () => {
-    dispatch(LoginUser(logi));
+  const fetchToken  = () => {
+    const resp = dispatch(LoginUser(logi));
   };
 
-async function loginUser(iuser:ILogin) {
+function loginUser(iuser:ILogin) {
   try {
-    await fetchToken();
+    const resp = fetchToken();
   }
   catch (e) {
     alert(e)
@@ -124,6 +121,11 @@ const toggleRemember = () => {
     >
       <img src="/logo512.png" className="h-28 w-28 max-auto content-center m-0 p-0" alt="Skyme logo" />
       <h1 className='m-0 p-0 text-slate-200 text-2xl'>Login in Skymey</h1>
+      {status > 0 && 
+        <h2 className='text-rose-600'>
+          {message}
+        </h2>
+      }
       <div className='p-0 m-0 w-full'>
       {(emailDirty && emailError) && 
             <div className='text-rose-600'>{emailError}</div>

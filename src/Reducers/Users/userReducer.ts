@@ -5,23 +5,27 @@ import { IUserState, IUserStateLogin } from "../../types/Interfaces/Reducers/Use
 const initialState: IUserState = {
     users: [],
     loading: false,
-    error: null
+    error: null,
+    status:0,
+    message:''
 }
 
 const initialStateLogin: IUserStateLogin = {
     jwtd: {AccessToken:"",RefreshToken:""},
     loading: false,
-    error: null
+    error: null,
+    status:0,
+    message:''
 }
 //22:09
 export const userReducer = (state = initialState,action: IUserAction): IUserState => {
     switch(action.type) {
         case UserActionTypes.FETCH_USERS:
-            return {loading: true, error: null, users: []}
+            return {loading: true, error: null, users: [],status:0,message:''}
         case UserActionTypes.FETCH_USERS_SUCCESS:
-            return {loading: false, error: null, users: action.payload}
+            return {loading: false, error: null, users: action.payload,status:0,message:''}
         case UserActionTypes.FETCH_USERS_ERROR:
-            return {loading: false, error: action.payload, users: []}    
+            return {loading: false, error: action.payload, users: [],status:action.status,message:action.message}    
         default:
             return state
     }
@@ -29,11 +33,11 @@ export const userReducer = (state = initialState,action: IUserAction): IUserStat
 export const userReducerLogin = (state = initialStateLogin,action: IUserActionLogin): IUserStateLogin => {
     switch(action.type) {
         case UserActionTypes.LOGIN_USER:
-            return {loading: true, error: null, jwtd: {AccessToken: "",RefreshToken:""}}
+            return {loading: true, error: null, jwtd: {AccessToken: "",RefreshToken:""},status:0,message:''}
         case UserActionTypes.LOGIN_USER_SUCCESS:
-            return {loading: false, error: null, jwtd: action.payload}
+            return {loading: false, error: null, jwtd: action.payload,status:action.status,message:action.message}
         case UserActionTypes.LOGIN_USER_ERROR:
-            return {loading: false, error: action.payload, jwtd: {AccessToken: "",RefreshToken:""}}    
+            return {loading: false, error: action.payload, jwtd: {AccessToken: "",RefreshToken:""},status:action.status,message:action.message}    
         default:
             return state
     }
