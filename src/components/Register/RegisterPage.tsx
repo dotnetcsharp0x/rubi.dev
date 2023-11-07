@@ -6,12 +6,16 @@ import { IRegister } from '../../types/Interfaces/Register/IRegister';
 import { RegisterU } from '../../types/Classes/Register/Register';
 import axios, { AxiosRequestConfig } from 'axios';
 import { IJWT } from '../../types/Interfaces/JWT/IJWT';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { RegisterUser } from '../../store/action-creator/user';
 
 
 
 export default function RegisterPage() {
   const cookies = new Cookies();
-  
+  const {jwtd,error,loading, status,message} = useTypedSelector(state => state.user_register);
+  const dispatch: any  = useDispatch();
   const reg = new RegisterU();
 
   const [name,setName] = useState("")
@@ -114,44 +118,33 @@ export default function RegisterPage() {
     reg.Password = password;
     Register();
   }
-  const Register = async () => {
+  const Register = () => {
     try {
-      const resp = await fetchToken();
-      if(resp == 200) {
-        window.location.href = '/';
-      }
-      else {
-        console.log(resp);
-      }
+      const resp = fetchToken();
     }
     catch (e) {
       alert(e)
     }
   }
-
-async function fetchToken() {
-  try {
-    const resp = await axios.post<IJWT>('https://46.22.247.253:5007/api/User/Register',reg);
-      if(resp.status == 200) {
-      if(remember) {
-        cookies.set("token",resp.data.AccessToken,{maxAge:2592000});
-        cookies.set("refreshToken",resp.data.RefreshToken,{maxAge:2592000});
-      }
-      else {
-        cookies.set("token",resp.data.AccessToken);
-        cookies.set("refreshToken",resp.data.RefreshToken);
-      }
-      setJwt(String(resp.data.AccessToken));
+  useEffect(() => {
+    console.log(jwtd.AccessToken);
+    if(jwtd.AccessToken) {
+    if(remember) {
+      cookies.set("token",jwtd.AccessToken,{maxAge:2592000});
+      cookies.set("refreshToken",jwtd.RefreshToken,{maxAge:2592000});
     }
     else {
-      console.log("208");
+      cookies.set("token",jwtd.AccessToken);
+      cookies.set("refreshToken",jwtd.RefreshToken);
     }
-    return resp.status;
+    setJwt(String(jwtd.AccessToken));
+    window.location.href = '/';
   }
-  catch (e) {
-    alert(e)
-  }
-}
+},[onButtonClick]);
+const fetchToken  = () => {
+  console.log(reg);
+  const resp = dispatch(RegisterUser(reg));
+};
 const toggleRemember = () => {
   setRemember((prevState) => !prevState);
 };
@@ -162,6 +155,11 @@ const toggleRemember = () => {
     >
       <img src="/logo512.png" className="h-28 w-28 max-auto content-center m-0 p-0" alt="Skyme logo" />
       <h1 className='m-0 p-0 text-slate-200 text-2xl'>Register in Skymey</h1>
+      {message && 
+        <h2 className='text-rose-600'>
+          {message}
+        </h2>
+      }
       <div className='p-0 m-0 w-full'>
         {(nameDirty && nameError) && 
             <div className='text-rose-600'>{nameError}</div>

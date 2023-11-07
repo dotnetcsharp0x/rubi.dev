@@ -13,3 +13,10 @@ export interface IUserActionLogin {
     status: number;
     message: string;
 }
+
+export interface IUserActionRegister {
+    type: string;
+    payload?: any;
+    status: number;
+    message: string;
+}

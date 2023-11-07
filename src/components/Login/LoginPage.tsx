@@ -16,7 +16,7 @@ import { LoginUser, fetchUsers } from '../../store/action-creator/user';
 
 export default function LoginPage() {
   const {jwtd,error,loading, status,message} = useTypedSelector(state => state.user_login);
-const dispatch: any  = useDispatch();
+  const dispatch: any  = useDispatch();
   const cookies = new Cookies();
 
   const logi = new Login();

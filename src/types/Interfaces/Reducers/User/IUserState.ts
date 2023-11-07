@@ -16,3 +16,10 @@ export interface IUserStateLogin {
     status: number;
     message: string;
 }
+export interface IUserStateRegister {
+    jwtd: JWT;
+    loading: boolean;
+    error: null | boolean;
+    status: number;
+    message: string;
+}

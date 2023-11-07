@@ -1,6 +1,6 @@
 import { Dispatch, useState } from "react"
 import { UserActionTypes } from "../../types/Interfaces/Actions/Users/IFetchUsersAction"
-import { IUserAction, IUserActionLogin } from "../../types/Interfaces/Actions/Users/IUserAction"
+import { IUserAction, IUserActionLogin, IUserActionRegister } from "../../types/Interfaces/Actions/Users/IUserAction"
 import axios, { AxiosError, AxiosResponse } from "axios"
 import Cookies from "universal-cookie"
 import { UserProps } from "../../types/Interfaces/Users/IUserProps"
@@ -10,6 +10,7 @@ import { Login } from "../../types/Classes/Login/Login"
 import { state } from "../../state"
 import { fetchToken } from "../.."
 import { IRespAxiosStatus } from "../../types/Interfaces/Login/IStatus"
+import { RegisterU } from "../../types/Classes/Register/Register"
 //export default function Header(props: UserProps) {
     
 export const fetchUsers = (props: string) => {
@@ -59,6 +60,33 @@ export const  LoginUser = (props: Login) => {
             }
             dispatch({
                 type: UserActionTypes.LOGIN_USER_ERROR,
+                payload: String(error.message),
+                status: error.response.status,
+                message: message,
+            })
+        }
+    }
+}
+
+export const  RegisterUser = (props: RegisterU) => {
+    return async (dispatch: Dispatch<IUserActionRegister>) => {
+        
+        try {
+            const resp = await axios.post<IJWT>('https://46.22.247.253:5007/api/User/Register',props);
+            console.log(resp);
+            let message='';
+            if(resp.status == 208) {
+                message='User already exist';
+            }
+            dispatch({type: UserActionTypes.REGISTER_USER_SUCCESS,payload: resp.data, status:resp.status,message:message})
+        }
+        catch (error : AxiosError<AxiosResponse> | any) {
+            let message='';
+            if(error.response.status == 208) {
+                message = "User already exist";
+            }
+            dispatch({
+                type: UserActionTypes.REGISTER_USER_ERROR,
                 payload: String(error.message),
                 status: error.response.status,
                 message: message,
