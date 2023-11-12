@@ -11,6 +11,7 @@ import { JWT } from './types/Classes/JWT/JWT';
 import { IJWT } from './types/Interfaces/JWT/IJWT';
 import { JwtPayload2 } from './types/Interfaces/JWT/JwtPayload2';
 import { state } from './state';
+import { updateJWT } from './store/UpdateJWT/updateJWT';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -62,6 +63,17 @@ if(jwtc.AccessToken != undefined) {
     resp();
   }
 }
+axios.interceptors.request.use(request => {
+  updateJWT();
+  console.log("request");
+  console.log(request);
+  // Edit request config
+  return request;
+}, error => {
+  console.log(error);
+  return Promise.reject(error);
+});
+
 root.render(
     <Provider store={store}>
       <div className='bg-slate-800 h-screen'>

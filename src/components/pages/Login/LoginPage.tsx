@@ -2,16 +2,16 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { FocusEvent, FormEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import Cookies from 'universal-cookie';
-import { ILogin } from '../../types/Interfaces/Login/ILogin';
-import { Login } from '../../types/Classes/Login/Login';
+import { ILogin } from '../../../types/Interfaces/Login/ILogin';
+import { Login } from '../../../types/Classes/Login/Login';
 import axios, { AxiosRequestConfig } from 'axios';
-import { IJWT } from '../../types/Interfaces/JWT/IJWT';
-import { UserProps } from '../../types/Interfaces/Users/IUserProps';
+import { IJWT } from '../../../types/Interfaces/JWT/IJWT';
+import { UserProps } from '../../../types/Interfaces/Users/IUserProps';
 import { HiMail,HiKey } from 'react-icons/hi';
 import { success } from 'io-ts';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { LoginUser, fetchUsers } from '../../store/action-creator/user';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { LoginUser, fetchUsers } from '../../../store/action-creator/user';
 
 
 export default function LoginPage() {

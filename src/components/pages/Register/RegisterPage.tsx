@@ -2,13 +2,13 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import Cookies from 'universal-cookie';
-import { IRegister } from '../../types/Interfaces/Register/IRegister';
-import { RegisterU } from '../../types/Classes/Register/Register';
+import { IRegister } from '../../../types/Interfaces/Register/IRegister';
+import { RegisterU } from '../../../types/Classes/Register/Register';
 import axios, { AxiosRequestConfig } from 'axios';
-import { IJWT } from '../../types/Interfaces/JWT/IJWT';
+import { IJWT } from '../../../types/Interfaces/JWT/IJWT';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { RegisterUser } from '../../store/action-creator/user';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { RegisterUser } from '../../../store/action-creator/user';
 
 
 
